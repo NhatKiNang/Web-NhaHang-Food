@@ -1,30 +1,32 @@
 const express = require("express");
-const router = express.Router();
 
 const {
   getRestaurants,
-  searchRestaurant,
+  getRestaurantById,
   createRestaurant,
+  searchRestaurant,
+  updateRestaurant,
+  deleteRestaurant,
 } = require("../controllers/restaurantController");
 
-const upload = require("../middleware/upload");
+const router = express.Router();
 
-/* =========================
-   GET ALL RESTAURANTS
-========================= */
-
+// GET ALL RESTAURANTS
 router.get("/", getRestaurants);
 
-/* =========================
-   SEARCH RESTAURANT
-========================= */
-
+// SEARCH RESTAURANT
 router.get("/search", searchRestaurant);
 
-/* =========================
-   CREATE RESTAURANT
-========================= */
+// GET RESTAURANT DETAIL
+router.get("/:id", getRestaurantById);
 
-router.post("/", upload.single("image"), createRestaurant);
+// CREATE RESTAURANT
+router.post("/", createRestaurant);
+
+// UPDATE RESTAURANT
+router.put("/:id", updateRestaurant);
+
+// DELETE RESTAURANT
+router.delete("/:id", deleteRestaurant);
 
 module.exports = router;
